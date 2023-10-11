@@ -23,6 +23,6 @@ An example of async module working with the promise object to simulate the sleep
     sleep(220752000);
     console.log("You can have the pie now :D");
 
-For this code example, you can wait 7 years for a delicious pie. But hey, if it's worth it, it's worth it.
+For this code example, you can wait exactly 7 years for a delicious pie. But hey, if it's worth it, it's worth it.
 
 Consequently, the entirety of the program will be mainly revolving around this one function to simulate in-game delays.
