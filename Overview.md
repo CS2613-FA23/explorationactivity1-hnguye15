@@ -3,5 +3,5 @@
 Instead of using a package or a library, I have found good usage in a particular utility module called "Async.js". Moreover, this module will be used in conjunction with the Promise object to simulate time-related functions.
 ## Async.js
 ### Purpose
-Async.js utility module is primarily used to perform asynchronous programming. According to Mozilla.org, "asynchronous programming is a technique that enables your program to start a potentially long-running task and still be able to be responsive to other events while that task runs, rather than having to wait until that task has finished. Once that task has finished, your program is presented with the result" ![ref](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing)
+Async.js utility module is primarily used to perform asynchronous programming. According to Mozilla.org, "asynchronous programming is a technique that enables your program to start a potentially long-running task and still be able to be responsive to other events while that task runs, rather than having to wait until that task has finished. Once that task has finished, your program is presented with the result" [ref](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing)
 
