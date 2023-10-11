@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>A Random Incremental Game</title>
+	</head>
+	<body>
+		<img id="character" src="https://opengameart.org/sites/default/files/zx%2001_2.gif" style="width:250px;length:250px">
+		<p>Level: <span id="level"></span></p>
+		<p>Exp: <span id="exp"></span></p>
+		<progress id="expProgress" value="0" max="100" style="display:block"></progress>
+		<p>Training Cost: <span id="trainCost"></span><span> gold</span></p>
+		<p><input type="button" id="train" value="Train" onclick="train()"></p>
+		<p>Gold: <span id="gold"></span></p>
+		
+		<p id="progressPrompt" hidden="hidden">
+			<text id="progressText">Progressing</text>
+			<progress id="progress" value="100" max="100" style="display:none"></progress>
+			<input type="button" id="abort" value="Return" onclick="abortAction()">
+		</p>
+		
+		<div id="actions">
+			<p>
+				<input type="button" id="rat" value="Kill rat" onclick="displayProgress()">
+			</p>
+			
+			<p>
+				<input type="button" id="wolf" value="Kill wolf" onclick="displayProgress()">
+			</p>
+			
+			<p>
+				<input type="button" id="boar" value="Kill wild boar" onclick="displayProgress()">
+			</p>
+			
+			<p>
+				<input type="button" id="goblin" value="Kill goblin" onclick="displayProgress()">
+			</p>
+			
+			<p>
+				<input type="button" id="goblinWarrior" value="Kill goblin warrior" onclick="displayProgress()">
+			</p>
+			
+			<p>
+				<input type="button" id="goblinMage" value="Kill goblin mage" onclick="displayProgress()">
+			</p>
+			
+			<p>
+				<input type="button" id="goblinChieftain" value="Kill goblin chieftain" onclick="displayProgress()">
+			</p>
+		</div>
+		
+		<script>
+			//GLOBAL VARIABLES
+			var level = 1;
+			var exp = 0;
+			var nextLevelExp = 15;
+			var gold = 0;
+			var trainCost = 10;
+			var enemyId;
+			var tickSpeed = 1000;
+			var inProgress = false;
+			var abort = false;
+			
+			//DISPLAYS
+			document.getElementById("level").innerHTML = level;
+			document.getElementById("exp").innerHTML = exp;
+			document.getElementById("trainCost").innerHTML = trainCost;
+			document.getElementById("gold").innerHTML = gold;
+			
+			//MISC FUNCTIONS
+			async function sleep(ms) {
+				return new Promise(resolve => setTimeout(resolve, ms));  
+			}
+			
+			function getEnemyId() {
+				return event.target.id;
+			}
+			
+			function abortAction() {
+				abort = true;
+			}
+			
+			//PROGRESS-BASED FUNCTIONS
+			async function displayProgress() {
+				if (inProgress) {
+					return;
+				}
+				inProgress = true;
+				enemyId = getEnemyId();
+				var display = document.getElementById("progress");
+				var prompt = document.getElementById("progressPrompt");
+				var actions = document.getElementById("actions");
+				var progress = display.getAttribute("value");
+				var time = calcTime(enemyId);
+				
+				prompt.removeAttribute("hidden");
+				actions.setAttribute("hidden", "hidden");
+				display.style.display = "block";
+				document.getElementById("character").src = "https://opengameart.org/sites/default/files/03%20zx_3.gif";
+				await updateProgress(time);
+				if (Math.floor(Math.random() * 2) == 0) {
+					document.getElementById("character").src = "https://opengameart.org/sites/default/files/zx%2001_2.gif";
+				}
+				else {
+					document.getElementById("character").src = "https://opengameart.org/sites/default/files/05%20zx%2001.gif";
+				}
+				resetProgress();
+				display.style.display = "none";
+				prompt.setAttribute("hidden", "hidden");
+				actions.removeAttribute("hidden");
+				inProgress = false;
+			}
+			
+			async function updateProgress(time) {
+				var prompt = document.getElementById("progressText");
+				var calc = (time-0.1*level)/time;
+				var multi = 1;
+				
+				prompt.innerHTML = "Progressing";
+				for (let i = time; i >= 0; i--) {
+					if (abort) {
+						abort = false;
+						return;
+					}
+					if (i > 0) {
+						percentage = (i / time) * 100;
+					}
+					else {percentage = 0;}
+					document.getElementById("progress").value = percentage;
+					if (percentage > 0) {
+						if (calc > 0) {
+							await sleep(tickSpeed*calc);
+						}
+						else if (calc < 0) {
+							//begin automation based on each level above cap.
+							multi = 1;
+							multi = multi + calc * (-1);
+						}
+						else if (calc = 0) {
+							//do nothing
+						}
+						if (prompt.innerHTML == "Progressing") {
+							prompt.innerHTML = "Progressing.";
+						}
+						else if (prompt.innerHTML == "Progressing.") {
+							prompt.innerHTML = "Progressing..";
+						}
+						else if (prompt.innerHTML == "Progressing..") {
+							prompt.innerHTML = "Progressing...";
+						}
+						else {
+							prompt.innerHTML = "Progressing";
+						}
+					}
+				}
+				addGold(enemyId, multi);
+				addExp(enemyId, multi);
+				levelUp();
+				expProg();
+			}
+			
+			function resetProgress() {
+				document.getElementById("progress").value = 100;
+			}
+			
+			
+			//CHARACTER-BASED FUNCTIONS
+			function expProg() {
+				var percentage;
+				percentage = (exp/nextLevelExp) * 100;
+				document.getElementById("expProgress").value = percentage;
+			}
+			
+			function levelUp() {
+				while (exp >= nextLevelExp) {
+					level++;
+					exp -= nextLevelExp;
+					nextLevelExp = Math.round(nextLevelExp*1.5);
+				}
+				document.getElementById("exp").innerHTML = exp;
+				document.getElementById("level").innerHTML = level;
+			}
+			
+			function train() {
+				if (gold >= trainCost && inProgress == false) {
+					level++;
+					gold = gold - trainCost;
+					trainCost = Math.round(trainCost*2.2);
+					document.getElementById("level").innerHTML = level;
+					document.getElementById("gold").innerHTML = gold;
+					document.getElementById("trainCost").innerHTML = trainCost;
+				}
+			}
+			
+			//CALCULATION-BASED FUNCTIONS
+			function calcTime(id) {
+				var calc = 0;
+				switch (id) {
+					case "rat":
+						return 4;
+						break;
+					case "wolf":
+						return 7;
+						break;
+					case "boar":
+						return 12;
+						break;
+					case "goblin":
+						return 16;
+						break;
+					case "goblinWarrior":
+						return 20;
+						break;
+					case "goblinMage":
+						return 25;
+						break;
+					case "goblinChieftain":
+						return 45;
+						break;
+					default:
+						return 0;
+				}
+			}
+			
+			function addExp(id, multi) {
+				var amount = multi;
+				switch (id) {
+					case "rat":
+						amount *= 10;
+						break;
+					case "wolf":
+						amount *= 28;
+						break;
+					case "boar":
+						amount *= 61;
+						break;
+					case "goblin":
+						amount *= 134;
+						break;
+					case "goblinWarrior":
+						amount *= 283;
+						break;
+					case "goblinMage":
+						amount *= 594;
+						break;
+					case "goblinChieftain":
+						amount *= 1348;
+						break;
+					default:
+						amount = 0;
+				}
+				exp = exp + Math.round(amount);
+				document.getElementById("exp").innerHTML = exp;
+			}
+			
+			function addGold(id, multi) {
+				var amount = multi;
+				switch (id) {
+					case "rat":
+						amount *= Math.floor(Math.random() * 4);
+						break;
+					case "wolf":
+						amount *= Math.floor(Math.random() * 13) + 5;
+						break;
+					case "boar":
+						amount *= Math.floor(Math.random() * 17) + 9;
+						break;
+					case "goblin":
+						amount *= Math.floor(Math.random() * 23) + 13;
+						break;
+					case "goblinWarrior":
+						amount *= Math.floor(Math.random() * 31) + 19;
+						break;
+					case "goblinMage":
+						amount *= Math.floor(Math.random() * 43) + 27;
+						break;
+					case "goblinChieftain":
+						amount *= Math.floor(Math.random() * 101) + 46;
+						break;
+					default:
+						amount = 0;
+				}
+				gold = gold + Math.round(amount);
+				document.getElementById("gold").innerHTML = gold;
+			}
+			
+		</script>
+	</body>
+</html>
+
+<!-- Image Credits: https://opengameart.org/content/guy-in-coat-animated-set -->
