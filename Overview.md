@@ -13,14 +13,16 @@ More from Mozilla.org, "The async function declaration creates a binding of a ne
         statements
     }
 
+Asynchronous functions must be called with "await" to work as intended.
+
 An example of async module working with the promise object to simulate the sleep() function from C:
 
-    function sleep(ms) {
+    async function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));  
     }
     
     console.log('The pie's gonna be ready in 7 years! Give it some time~');
-    sleep(220752000);
+    await sleep(220752000);
     console.log("You can have the pie now :D");
 
 For this code example, you can wait exactly 7 years for a delicious pie. But hey, if it's worth it, it's worth it.
