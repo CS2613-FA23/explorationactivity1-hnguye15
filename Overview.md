@@ -13,7 +13,7 @@ More from Mozilla.org, "The async function declaration creates a binding of a ne
         statements
     }
 
-Asynchronous functions must be called with "await" to work as intended.
+While asynchronous functions can be declared using "async" to return a promise, they also must be called with "await" to wait for such promise.
 
 An example of async module working with the promise object to simulate the sleep() function from C:
 
@@ -120,3 +120,11 @@ Further, "Async functions can contain zero or more await expressions. Await expr
     
     // wait again
     setTimeout(concurrent2, 10000); // after 1 second, logs "fast", then after 1 more second, "slow"
+
+## Origin
+Asynchronous programming was implemented by the language F# first then from there on, a lot more languages have started to adopt this programming style, especially C#, which was the first mainstream language that popularized the async/await keywords [ref](https://dev.to/maxarshinov/a-brief-history-of-asyncawait-264j).
+
+As for the Promise object used alongside the module, according to risingstack.com, "the current JavaScript Promise specifications date back to 2012 and available from ES6 – however Promises were not invented by the JavaScript community. The term comes from Daniel P. Friedman from 1976.[ref](https://blog.risingstack.com/asynchronous-javascript/)"
+
+## Reasons for selection
+
