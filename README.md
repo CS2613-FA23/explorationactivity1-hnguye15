@@ -1,5 +1,4 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/oB7VDeFN)
-# ExplorationActivity1
+# Exploration Activity 1
 ## Package/Library
 The program works around JavaScript's Async.js, which is a utility module. Further, the program makes use of the Promise object to work with time-related functions.
 ## Demonstration
