@@ -16,5 +16,5 @@ More from Mozilla.org, "The async function declaration creates a binding of a ne
 An example of async module working with the promise object to simulate the sleep() function from C:
 
     function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));  
+    return new Promise(resolve => setTimeout(resolve, ms));  
     }
