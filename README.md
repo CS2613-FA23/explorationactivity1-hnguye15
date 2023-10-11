@@ -16,5 +16,5 @@ To increase these parameters, you can either train your character by using gold,
 The main purpose of earning more level is killing things faster. See, each monster has a specific time needed to kill, but with a higher level you can kill them quicker, thus helping with progression.
 
 Here are some sample screenshots of the game:
-[![idle](idle.png)
-[![progressing](progressing.png)
+[![idle](idle.png)]
+[![progressing](progressing.png)]
