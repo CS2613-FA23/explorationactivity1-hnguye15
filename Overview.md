@@ -30,9 +30,9 @@ For this code example, you can wait exactly 7 years for a delicious pie. But hey
 Consequently, the entirety of the program will be mainly revolving around this one function to simulate in-game delays.
 
 ### Functionality
-According to Mozilla.org, "An async function declaration creates an AsyncFunction object. Each time when an async function is called, it returns a new Promise which will be resolved with the value returned by the async function, or rejected with an exception uncaught within the async function.[ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)"
+According to Mozilla.org, "An async function declaration creates an AsyncFunction object. Each time when an async function is called, it returns a new Promise which will be resolved with the value returned by the async function, or rejected with an exception uncaught within the async function [[ref]](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)."
 
-Further, "Async functions can contain zero or more await expressions. Await expressions make promise-returning functions behave as though they're synchronous by suspending execution until the returned promise is fulfilled or rejected. The resolved value of the promise is treated as the return value of the await expression. Use of async and await enables the use of ordinary try/catch blocks around asynchronous code.[ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)"
+Further, "Async functions can contain zero or more await expressions. Await expressions make promise-returning functions behave as though they're synchronous by suspending execution until the returned promise is fulfilled or rejected. The resolved value of the promise is treated as the return value of the await expression. Use of async and await enables the use of ordinary try/catch blocks around asynchronous code [ref]](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)."
 
 #### Example
     function resolveAfter2Seconds() {
@@ -122,9 +122,9 @@ Further, "Async functions can contain zero or more await expressions. Await expr
     setTimeout(concurrent2, 10000); // after 1 second, logs "fast", then after 1 more second, "slow"
 
 ## Origin
-Asynchronous programming was implemented by the language F# first then from there on, a lot more languages have started to adopt this programming style, especially C#, which was the first mainstream language that popularized the async/await keywords [ref](https://dev.to/maxarshinov/a-brief-history-of-asyncawait-264j).
+Asynchronous programming was implemented by the language F# first then from there on, a lot more languages have started to adopt this programming style, especially C#, which was the first mainstream language that popularized the async/await keywords [[ref]](https://dev.to/maxarshinov/a-brief-history-of-asyncawait-264j).
 
-As for the Promise object used alongside the module, according to risingstack.com, "the current JavaScript Promise specifications date back to 2012 and available from ES6 – however Promises were not invented by the JavaScript community. The term comes from Daniel P. Friedman from 1976.[ref](https://blog.risingstack.com/asynchronous-javascript/)"
+As for the Promise object used alongside the module, according to risingstack.com, "the current JavaScript Promise specifications date back to 2012 and available from ES6 – however Promises were not invented by the JavaScript community. The term comes from Daniel P. Friedman from 1976 [[ref]](https://blog.risingstack.com/asynchronous-javascript/)."
 
 ## Reasons for selection
 
