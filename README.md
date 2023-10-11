@@ -14,3 +14,7 @@ The character first starts off at:
 
 To increase these parameters, you can either train your character by using gold, giving you a free level, or kill monsters to earn experience to level up. It is pretty much a typical RPG experience.
 The main purpose of earning more level is killing things faster. See, each monster has a specific time needed to kill, but with a higher level you can kill them quicker, thus helping with progression.
+
+Here are some sample screenshots of the game:
+[![idle](idle.png)
+[![progressing](progressing.png)
