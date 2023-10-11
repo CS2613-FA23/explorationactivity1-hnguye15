@@ -18,3 +18,9 @@ An example of async module working with the promise object to simulate the sleep
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));  
     }
+    
+    console.log('The pie's gonna be ready in 7 years! Give it some time~');
+    sleep(220752000);
+    console.log("You can have the pie now :D");
+
+Consequently, the entirety of the program will be mainly revolving around this one function to simulate in-game delays.
