@@ -22,7 +22,7 @@ An example of async module working with the promise object to simulate the sleep
     }
     
     console.log('The pie's gonna be ready in 7 years! Give it some time~');
-    await sleep(220752000);
+    await sleep(220752000000);
     console.log("You can have the pie now :D");
 
 For this code example, you can wait exactly 7 years for a delicious pie. But hey, if it's worth it, it's worth it.
