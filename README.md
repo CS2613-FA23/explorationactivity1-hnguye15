@@ -28,7 +28,7 @@ Displays the character model as a .gif file. Goes into one of the 2 idle animati
 ### Level
 Affects the speed of performing an action by reducing the tick speed (default 1000ms) proportionally to the flat reduction of needed time. Basically, it means the higher level you have, the less time you have to wait for an action to end. Example: if the original time needed is 5s and it gets reduced to 3s, then the time delayed (or tick speed) is reduced to 60%, which is 600ms. The formula is:
 
-tickSpeed  ×  (time-0.1×level)/time
+                                                  tickSpeed  ×  (time-0.1×level)/time
 
 When the result reaches 0, the action is instantaneous (it becomes a clicker game!). However, when it goes below 0, I have planned to add automation to the action with rewards based on how many seconds below 0 there are. Right now, the value is locked to 0 when it’s below 0.
 Of course, the level of the character is increased when you reach a required exp value called nextLevelExp. This nextLevelExp value increases by 1.5 times and your current exp is reduced to 0 every time you level up.
